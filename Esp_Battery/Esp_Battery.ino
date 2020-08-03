@@ -8,7 +8,7 @@
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
 
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);  //Setting Screen Height And Width
 
 ESP8266WebServer server(80);    // Create a webserver object that listens for HTTP request on port 80
 
@@ -48,9 +48,9 @@ void setup(){
   display.println("CONNECTED");
   display.display();
 
-  WiFi.softAP("flash1", "iamtheflash");
+  WiFi.softAP("flash1", "iamtheflash"); //Access point id and pwd In this case Id="flash1" Password="iamtheflash"
 
-  IPAddress myIP = WiFi.softAPIP();
+  IPAddress myIP = WiFi.softAPIP(); //Get Ip Address == 192.168.4.1
   Serial.print("AP IP address: ");
   Serial.println(myIP);          // Send the IP address of the ESP8266 to the computer
 
@@ -87,27 +87,27 @@ void handleRequest() { // If a POST request is made to URI /command
   }
   
   // Get the parameters: pin and value
-  String temp = "";
-  temp = server.arg("pin"); 
-  String  pin = temp;
-  temp = server.arg("value"); 
+  String temp = "";          //temporary variable
+  temp = server.arg("pin");   // Value of Preset Level and Threshold depending upon the variable value is "true" "false" "preset" threshold"
+  String  pin = temp;        
+  temp = server.arg("value"); // Value i.e true false preset threshold
   String value = temp;
 
   Current_Value = pin.toInt();
   
   if(value == "preset")
     {
-      Preset_Value = Current_Value;
+      Preset_Value = Current_Value; //Setting Preset Value From User
     }  
 
      if(value == "threshold")
     {
-      Threshold_Value = Current_Value;
+      Threshold_Value = Current_Value; //Setting Threshold Value from user
     }  
 
   if(value == "true")
     {
-      if(Current_Value > Preset_Value-1)
+      if(Current_Value > Preset_Value-1) //OFF THE RELAY IF Current_Value>=Preset_Value
     {
       digitalWrite(Pin_Relay,LOW);
     }
@@ -116,7 +116,7 @@ void handleRequest() { // If a POST request is made to URI /command
 
   if(value == "false")
     {
-      if(Current_Value < Threshold_Value+1)
+      if(Current_Value < Threshold_Value+1) //ON THE RELAY IF Current_Value<= Threshold_Value
     {
       digitalWrite(Pin_Relay,HIGH);
     }
@@ -124,14 +124,14 @@ void handleRequest() { // If a POST request is made to URI /command
     }
 
   
-  Serial.println(pin);
+  Serial.println(pin); //Printing to debug
   Serial.println(value);
   
   server.send(200, "text/html", "Wi-fi Remote Control Example");
   return;
 }
 
-void DisplayScreen(int bat_level ,String bat_status )
+void DisplayScreen(int bat_level ,String bat_status ) //Setting Display
 {
   display.clearDisplay();
   display.setTextSize(2);
