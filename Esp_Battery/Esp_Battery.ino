@@ -20,18 +20,19 @@ void handleRequest();
 void handleNotFound();
 
 int Current_Value = 0;
-int Preset_Value = 85;
-int Threshold_Value = 75;
+int Preset_Value = 85; //Default Preset Value
+int Threshold_Value = 75; //Default Threshold Value
+int Current_Value_Check = -1; //Keeps a Check of Previous Value
 
 int Pin_Relay = 2;
 
 void setup(){
   Serial.begin(115200);         // Start the Serial communication to send messages to the computer
   pinMode(Pin_Relay, OUTPUT); //Relay Connection
-  digitalWrite(Pin_Relay,HIGH);
+  digitalWrite(Pin_Relay,HIGH); //Intially Charging Available
   Serial.println('\n');
   Serial.println("Working");
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C); //Begining OLED Display Hex Address 0x3C I2C
   
   delay(2000);
   
@@ -40,12 +41,12 @@ void setup(){
   display.setTextColor(WHITE);
   display.setCursor(0, 0);
   // Display static text
-  display.println("NOT");
+  display.println("NOT"); //Displaying NOT
   display.setTextSize(2);
   display.setTextColor(WHITE);
   display.setCursor(0, 25);
   // Display static text
-  display.println("CONNECTED");
+  display.println("CONNECTED"); //Displaying CONNECTED
   display.display();
 
   WiFi.softAP("flash1", "iamtheflash"); //Access point id and pwd In this case Id="flash1" Password="iamtheflash"
@@ -97,11 +98,20 @@ void handleRequest() { // If a POST request is made to URI /command
   
   if(value == "preset")
     {
+      if(Current_Value<=Current_Value_Check) //Checks if preset value set is greater or lesser than the previous recorded value
+      {digitalWrite(Pin_Relay,LOW);} //Turn Realy OFF
+      else if(Current_Value>Current_Value_Check)
+      {digitalWrite(Pin_Relay,HIGH);} //Turn Realy ON
+    
       Preset_Value = Current_Value; //Setting Preset Value From User
     }  
 
      if(value == "threshold")
     {
+      if(Current_Value>=Current_Value_Check)  //Checks if threshold value set is greater or lesser than the previous recorded value
+      {digitalWrite(Pin_Relay,HIGH);} //Turn Realy ON
+      else if(Current_Value<Current_Value_Check)
+      {digitalWrite(Pin_Relay,LOW);} //Turn Realy OFF
       Threshold_Value = Current_Value; //Setting Threshold Value from user
     }  
 
@@ -109,23 +119,23 @@ void handleRequest() { // If a POST request is made to URI /command
     {
       if(Current_Value > Preset_Value-1) //OFF THE RELAY IF Current_Value>=Preset_Value
     {
-      digitalWrite(Pin_Relay,LOW);
+      digitalWrite(Pin_Relay,LOW); //Turn Realy OFF
     }
-    DisplayScreen(Current_Value,value);
+    DisplayScreen(Current_Value,value); //Update the display
     }
 
   if(value == "false")
     {
       if(Current_Value < Threshold_Value+1) //ON THE RELAY IF Current_Value<= Threshold_Value
     {
-      digitalWrite(Pin_Relay,HIGH);
+      digitalWrite(Pin_Relay,HIGH); //Turn Realy ON
     }
-    DisplayScreen(Current_Value,value);
+    DisplayScreen(Current_Value,value); //Update the display
     }
 
   
-  Serial.println(pin); //Printing to debug
-  Serial.println(value);
+  Serial.println(pin); //Printing to debug i.e Battery Percent of Mobile, Preset or Threshold Value Whatever sent through App
+  Serial.println(value); //Printing if true false preset or threshold sent through app
   
   server.send(200, "text/html", "Wi-fi Remote Control Example");
   return;
