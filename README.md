@@ -32,6 +32,26 @@
       cordova plugin add cordova-plugin-battery-status
 ##### Build The App
       cordova build android
+##### The problem with Android Pie AJAX
+       https://medium.com/mindorks/my-network-requests-are-not-working-in-android-pie-7c7a31e33330
+   ##### Android Pie uses https and blocks http so manually we have to set the settings
+   ###### You just need to create a network_security_config file in the xml folder and then include it in the manifest in the following manner.
+      <?xml version="1.0" encoding="utf-8"?>
+      <manifest ... >
+          <application android:networkSecurityConfig="@xml/network_security_config"
+                          ... >
+              ...
+          </application>
+      </manifest>
+   ###### The network_security_config file looks like this.
+    <?xml version="1.0" encoding="utf-8"?>
+    <network-security-config>
+        <domain-config cleartextTrafficPermitted="true">
+            <domain includeSubdomains="true">**Some http file**</domain>
+        </domain-config>
+    </network-security-config>
+  Here you can simply mention the domain name of your server or all the domain names that are using HTTP.
+   
 
       
       
