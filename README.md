@@ -10,9 +10,9 @@
        
  #### Install Java jdk in your device and set path in Environment Variables
        https://www.oracle.com/java/technologies/javase-jdk15-downloads.html
-   # 1)Once done go to Control Panel System Settings
-   # 2)Advance Settings --> Environment Variables
-   # 3)Click New 
+   ##### 1)Once done go to Control Panel System Settings
+   ##### 2)Advance Settings --> Environment Variables
+   ##### 3)Click New 
        Variable Name: Path
        Variable Value : Inside your Java folder go to jdk go to bin and copy the address and paste 
        e.g Variable Value : C:\Program Files\Java\jdk1.8.0_261\bin
@@ -20,7 +20,7 @@
        
 #### Install Android Studios
       https://developer.android.com/studio
-   # 1)Once Installed and setup go to File --> Settings --> Appearance and Behaviour
+   ##### 1)Once Installed and setup go to File --> Settings --> Appearance and Behaviour
     
       
       
