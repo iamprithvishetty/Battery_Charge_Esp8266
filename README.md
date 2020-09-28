@@ -23,5 +23,15 @@
    ##### 1)Once Installed and setup go to File --> Settings --> Appearance and Behaviour --> System Settings --> Android SDK
    ##### 2) Download all the required SDK versions
     
+#### Create the App in cmd
+##### Go to the directory where you maintain your source code, and create a cordova project:
+      cordova create hello com.example.hello HelloWorld
+##### Add the platforms
+      cordova platform add android
+##### Add the necessary plugins
+      cordova plugin add cordova-plugin-battery-status
+##### Build The App
+      cordova build android
+
       
       
