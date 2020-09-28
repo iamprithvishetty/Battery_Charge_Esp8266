@@ -16,11 +16,12 @@
        Variable Name: Path
        Variable Value : Inside your Java folder go to jdk go to bin and copy the address and paste 
        e.g Variable Value : C:\Program Files\Java\jdk1.8.0_261\bin
-       Click Okay
+       Click OK
        
 #### Install Android Studios
       https://developer.android.com/studio
-   ##### 1)Once Installed and setup go to File --> Settings --> Appearance and Behaviour
+   ##### 1)Once Installed and setup go to File --> Settings --> Appearance and Behaviour --> System Settings --> Android SDK
+   ##### 2) Download all the required SDK versions
     
       
       
