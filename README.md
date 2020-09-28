@@ -47,7 +47,7 @@
     <?xml version="1.0" encoding="utf-8"?>
     <network-security-config>
         <domain-config cleartextTrafficPermitted="true">
-            <domain includeSubdomains="true">**Some http file**</domain>
+            <domain includeSubdomains="true">Http Local Server</domain>
         </domain-config>
     </network-security-config>
   Here you can simply mention the domain name of your server or all the domain names that are using HTTP.
