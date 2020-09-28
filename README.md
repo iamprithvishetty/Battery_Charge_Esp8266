@@ -52,10 +52,10 @@
         </domain-config>
     </network-security-config>
   Here you can simply mention the domain name of your server or all the domain names that are using HTTP.
-  ###### Setting Android SDK LOWER AND HIGHER LEVEL
-         In cofig.xml change 
-         <preference name="android-minSdkVersion" value="22" />
-	 <preference name="android-targetSdkVersion" value="29" />
+###### Setting Android SDK LOWER AND HIGHER LEVEL
+	In cofig.xml change 
+	<preference name="android-minSdkVersion" value="22" />
+	<preference name="android-targetSdkVersion" value="29" />
   
   
    
