@@ -55,7 +55,7 @@
   ###### Setting Android SDK LOWER AND HIGHER LEVEL
          In cofig.xml change 
          <preference name="android-minSdkVersion" value="22" />
-		       <preference name="android-targetSdkVersion" value="29" />
+	 <preference name="android-targetSdkVersion" value="29" />
   
   
    
